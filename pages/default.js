@@ -552,4 +552,104 @@ addSearchAliasX('w', 'bing', 'http://global.bing.com/search?setmkt=en-us&setlang
 addSearchAliasX('s', 'stackoverflow', 'http://stackoverflow.com/search?q=');
 addSearchAliasX('h', 'github', 'https://github.com/search?type=Code&utf8=%E2%9C%93&q=');
 
+
+// Add Vocabulary.com shortcuts
+mapkey('?', 'Show help', function() {
+    Front.showPopup('<strong>Navigation:</strong><p/> Play(gp), Lookup(gd), Lists(gl) <hr/> <strong>Play:</strong><p/> next(n), answer(a, b, c, d), lookup answer(Ctrl+a, b, c, d). play sound when dictation(p), spell it when dictaion(s), give up when dictation(v). lookup self(l), listen(t) <hr/> <strong>List:</strong><p/> get the words of list (gw)');
+});
+
+function findElementAndClick(cssSelector) {
+    var results = document.querySelectorAll(cssSelector);
+    if (results.length === 1) {
+        results[0].click();
+    } else if (results.length >= 2) {
+        alert("found: " + results[0].innerHTML + " | " + results[1].innerHTML);
+    } else {
+        alert("found: " + results.length);            
+    }
+}
+
+mapkey('a', 'select first answer', function() {
+    findElementAndClick("div#challenge div.active div.question a[accesskey='1A']");
+});
+
+mapkey('b', 'select second answer', function() {
+    findElementAndClick("div#challenge div.active div.question a[accesskey='2B']");
+});
+
+mapkey('c', 'select third answer', function() {
+    findElementAndClick("div#challenge div.active div.question a[accesskey='3C']");
+});
+
+mapkey('d', 'select forth answer', function() {
+    findElementAndClick("div#challenge div.active div.question a[accesskey='4D']");
+});
+
+mapkey('p', 'play sound when dictation', function() {
+    findElementAndClick("div#challenge div.active div.question button.playword");
+});
+
+mapkey('s', 'commit answer when dictation', function() {
+    findElementAndClick("div#challenge div.active div.question button.spellit");
+});
+
+mapkey('v', 'give up when dictation', function() {
+    findElementAndClick("div#challenge div.active div.question button.surrender");
+});
+
+mapkey('n', 'next question', function() {
+    findElementAndClick("div#challenge button.next.active");
+});
+
+mapkey('l', 'lookup current word', function() {
+    findElementAndClick("div.tools > a.lookup");
+});
+
+mapkey('t', 'listen current word', function() {
+    findElementAndClick("div.tools > a.listen");
+});
+
+mapkey('<Ctrl-a>', 'lookup first answer', function() {
+    findElementAndClick("div.choices > a[accesskey='1A'] > div.lookup");
+});
+
+mapkey('<Ctrl-b>', 'lookup second answer', function() {
+    findElementAndClick("div.choices > a[accesskey='2B'] > div.lookup");
+});
+
+mapkey('<Ctrl-c>', 'lookup third answer', function() {
+    findElementAndClick("div.choices > a[accesskey='3C'] > div.lookup");
+});
+
+mapkey('<Ctrl-d>', 'lookup forth answer', function() {
+    findElementAndClick("div.choices > a[accesskey='4D'] > div.lookup");
+});
+
+mapkey('gp', 'go to player', function() {
+    findElementAndClick("nav.tabs > ul > li.playTab > a");
+});
+
+mapkey('gd', 'go to player', function() {
+    findElementAndClick("nav.tabs > ul > li.dictTab > a");
+});
+
+mapkey('gl', 'go to lists', function() {
+    findElementAndClick("nav.tabs > ul > li.listsTab > a");
+});
+
+mapkey('gw', 'get the words need to learning', function() {
+    var rows = document.querySelectorAll("section.listmaker > div.results div.resultsonly div.list table tr");
+    var words = '';
+    rows.forEach(function(row, index, array) {
+        var element = row.querySelector("td.word");
+        if (element !== null && element !== undefined) {
+            words = words + element.innerHTML + ", "
+        }
+    });
+    
+    Front.showPopup("<strong>Words</strong><p/>" + words);
+});
+// Add Vocabulary.com shortcuts
+
+
 $(document).trigger("surfingkeys:defaultSettingsLoaded");

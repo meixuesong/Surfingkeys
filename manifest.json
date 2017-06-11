@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Surfingkeys",
+    "name": "MySurfingkeys",
     "short_name": "Map your keys for web surfing",
     "version": "0.8.7",
     "description": "Expand your browser with javascript and keyboard.",
@@ -19,7 +19,7 @@
             "16": "icons/16.png",
             "48": "icons/48.png"
         },
-        "default_title": "Surfingkeys",
+        "default_title": "MySurfingkeys",
         "default_popup": "pages/popup.html"
     },
     "author": "brook hong",
@@ -45,7 +45,7 @@
         ]
     },
     "content_scripts": [{
-        "matches": ["<all_urls>"],
+        "matches": ["*://*.vocabulary.com/*"],
         "match_about_blank": true,
         "js": [
             // build:common_content
@@ -61,7 +61,9 @@
             // endbuild
             "content_scripts/front.js",
             "content_scripts/content_scripts.js",
-            "pages/default.js"
+            "pages/default.js",
+            //remove AD
+            "content_scripts/removeAd.js"
         ],
         "css": ["content_scripts/content_scripts.css"],
         "run_at": "document_start",
