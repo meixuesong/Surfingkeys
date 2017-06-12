@@ -558,31 +558,34 @@ mapkey('?', 'Show help', function() {
     Front.showPopup('<strong>Navigation:</strong><p/> Play(gp), Lookup(gd), Lists(gl) <hr/> <strong>Play:</strong><p/> next(n), answer(a, b, c, d), lookup answer(Ctrl+a, b, c, d). play sound when dictation(p), spell it when dictaion(s), give up when dictation(v). lookup self(l), listen(t) <hr/> <strong>List:</strong><p/> get the words of list (gw)');
 });
 
-function findElementAndClick(cssSelector) {
+function findElementAndClick(cssSelector, backupSelector) {
     var results = document.querySelectorAll(cssSelector);
     if (results.length === 1) {
         results[0].click();
     } else if (results.length >= 2) {
         alert("found: " + results[0].innerHTML + " | " + results[1].innerHTML);
+    } else if (backupSelector !== null && backupSelector !== undefined) {
+        findElementAndClick(backupSelector);
     } else {
         alert("found: " + results.length);            
     }
 }
 
+//加div#challenge div.active div.question a[accesskey='1']，是用于4张图片那种答案。
 mapkey('a', 'select first answer', function() {
-    findElementAndClick("div#challenge div.active div.question a[accesskey='1A']");
+    findElementAndClick("div#challenge div.active div.question a[accesskey='1A']", "div#challenge div.active div.question a[accesskey='1']");
 });
 
 mapkey('b', 'select second answer', function() {
-    findElementAndClick("div#challenge div.active div.question a[accesskey='2B']");
+    findElementAndClick("div#challenge div.active div.question a[accesskey='2B']", "div#challenge div.active div.question a[accesskey='2']");
 });
 
 mapkey('c', 'select third answer', function() {
-    findElementAndClick("div#challenge div.active div.question a[accesskey='3C']");
+    findElementAndClick("div#challenge div.active div.question a[accesskey='3C']", "div#challenge div.active div.question a[accesskey='3']");
 });
 
 mapkey('d', 'select forth answer', function() {
-    findElementAndClick("div#challenge div.active div.question a[accesskey='4D']");
+    findElementAndClick("div#challenge div.active div.question a[accesskey='4D']", "div#challenge div.active div.question a[accesskey='4']");
 });
 
 mapkey('p', 'play sound when dictation', function() {
