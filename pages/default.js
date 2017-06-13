@@ -609,7 +609,7 @@ mapkey('l', 'lookup current word', function() {
 });
 
 mapkey('t', 'listen current word', function() {
-    findElementAndClick("div.tools > a.listen");
+    findElementAndClick("div.tools > a.listen", "h1.dynamictext a.audio");
 });
 
 mapkey('<Ctrl-a>', 'lookup first answer', function() {
