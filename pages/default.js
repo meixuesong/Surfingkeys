@@ -563,7 +563,7 @@ function findElementAndClick(cssSelector, backupSelector) {
     if (results.length === 1) {
         results[0].click();
     } else if (results.length >= 2) {
-        alert("found: " + results[0].innerHTML + " | " + results[1].innerHTML);
+        alert("found: " + results[0].outerHTML + " | " + results[1].outerHTML);
     } else if (backupSelector !== null && backupSelector !== undefined) {
         findElementAndClick(backupSelector);
     } else {
@@ -613,19 +613,19 @@ mapkey('t', 'listen current word', function() {
 });
 
 mapkey('<Ctrl-a>', 'lookup first answer', function() {
-    findElementAndClick("div.choices > a[accesskey='1A'] > div.lookup");
+    findElementAndClick("div#challenge div.selected div.question a[accesskey='1A'] > div.lookup");
 });
 
 mapkey('<Ctrl-b>', 'lookup second answer', function() {
-    findElementAndClick("div.choices > a[accesskey='2B'] > div.lookup");
+    findElementAndClick("div#challenge div.selected div.question a[accesskey='2B'] > div.lookup");
 });
 
 mapkey('<Ctrl-c>', 'lookup third answer', function() {
-    findElementAndClick("div.choices > a[accesskey='3C'] > div.lookup");
+    findElementAndClick("div#challenge div.selected div.question a[accesskey='3C'] > div.lookup");
 });
 
 mapkey('<Ctrl-d>', 'lookup forth answer', function() {
-    findElementAndClick("div.choices > a[accesskey='4D'] > div.lookup");
+    findElementAndClick("div#challenge div.selected div.question a[accesskey='4D'] > div.lookup");
 });
 
 mapkey('gp', 'go to player', function() {
