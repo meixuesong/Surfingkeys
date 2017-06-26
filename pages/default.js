@@ -588,20 +588,20 @@ mapkey('d', 'select forth answer', function() {
     findElementAndClick("div#challenge div.active div.question a[accesskey='4D']", "div#challenge div.active div.question a[accesskey='4']");
 });
 
-mapkey('p', 'play sound when dictation', function() {
-    findElementAndClick("div#challenge div.active div.question button.playword");
+mapkey('p', 'play sound when dictation, or play sound when play bee game', function() {
+    findElementAndClick("div#challenge div.active div.question button.playword", "button#playword");
 });
 
 mapkey('s', 'commit answer when dictation', function() {
     findElementAndClick("div#challenge div.active div.question button.spellit");
 });
 
-mapkey('v', 'give up when dictation', function() {
-    findElementAndClick("div#challenge div.active div.question button.surrender");
+mapkey('v', 'give up when dictation, or give up in bee game', function() {
+    findElementAndClick("div#challenge div.active div.question button.surrender", "button#surrender");
 });
 
-mapkey('n', 'next question', function() {
-    findElementAndClick("div#challenge button.next.active");
+mapkey('n', 'next question or next game in bee game', function() {
+    findElementAndClick("div#challenge button.next.active", "button#nextword");
 });
 
 mapkey('l', 'lookup current word', function() {
@@ -652,6 +652,28 @@ mapkey('gw', 'get the words need to learning', function() {
     
     Front.showPopup("<strong>Words</strong><p/>" + words);
 });
+
+function copyToClipboard(text) {
+  window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+mapkey('gs', 'get the words and transform to studies flashcard', function() {
+    var result = "";
+    var list = document.querySelectorAll("ol#wordlist");
+    if (list.length === 1) {
+        var entries = list[0].querySelectorAll("li");
+        entries.forEach(function(li, index, array) {
+            var word = li.querySelector("a").innerHTML;
+            var definition = li.querySelector("div.definition").innerHTML;
+            result = result + "<strong>" + word + "</strong>\t" + definition + "<br/>";
+        });
+    }
+    
+    // copyToClipboard(result);
+    Front.showPopup(result);
+});
+
+
 // Add Vocabulary.com shortcuts
 
 
