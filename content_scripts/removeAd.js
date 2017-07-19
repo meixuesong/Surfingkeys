@@ -11,5 +11,14 @@ function removeAds() {
 	removeBy("div#google_center_div")
 }
 
+function removeFocus() {
+	var results = document.querySelectorAll("input#search");
+    if (results.length === 1) {
+        results[0].blur();
+    }
+}
 
-setTimeout(function() {removeAds();}, 1500);
+setTimeout(function() {removeFocus(); removeAds();}, 1500);
+
+//sometime page load very slow, so we need remove ads again.
+setTimeout(function() {removeAds();}, 4000);
