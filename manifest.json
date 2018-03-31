@@ -69,7 +69,7 @@
         "run_at": "document_start",
         "all_frames": true
     }, {
-        "matches": ["<all_urls>"],
+        "matches": ["*://*.vocabulary.com/*"],
         "match_about_blank": true,
         "js": [
             "content_scripts/top.js"
